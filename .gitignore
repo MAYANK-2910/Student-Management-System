@@ -1,0 +1,38 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+*.local
+
+# Python (if used for scripts)
+__pycache__/
+*.pyc
+
+# Node at repo root (if ever installed here)
+node_modules/
+
+# Maven / Java build output at repo root
+target/
+build/
+
+# Local scratch file currently in root
+New Text Document.txt
+
+IMPLEMENTATION_PLAN.md
+
+DESIGN.md
+DESIGN_DOCUMENT.md
+DESIGN.md:Zone.identifier

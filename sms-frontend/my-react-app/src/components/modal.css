@@ -1,0 +1,61 @@
+.smsModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(24, 29, 38, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 50;
+}
+
+.smsModal {
+  width: 100%;
+  max-width: 820px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(224, 226, 230, 1);
+  box-shadow: var(--theme_shadow_blue, rgba(45, 127, 249, 0.28) 0px 1px 3px);
+  overflow: hidden;
+}
+
+.smsModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(224, 226, 230, 1);
+}
+
+.smsModalTitle {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.smsIconBtn {
+  border: 1px solid rgba(224, 226, 230, 1);
+  background: rgba(248, 250, 252, 1);
+  color: #181d26;
+  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.smsIconBtn:hover {
+  background: rgba(27, 97, 201, 0.06);
+}
+
+.smsModalBody {
+  padding: 16px;
+}
+
+.smsModalFooter {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(224, 226, 230, 1);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
