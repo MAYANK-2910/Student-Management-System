@@ -12,8 +12,9 @@ import Timetable from './pages/Timetable.jsx'
 import Profile from './pages/Profile.jsx'
 import NotFound from './pages/NotFound.jsx'
 
-import './app.css'
-import './airtable.css'
+import './styles/premium-design.css'
+import './styles/premium-components.css'
+import './styles/premium-layout.css'
 
 export default function App() {
   return (
