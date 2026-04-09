@@ -28,6 +28,7 @@ export default function AppShell() {
     { to: '/attendance/current', label: 'Attendance (Current)' },
     { to: '/attendance/overall', label: 'Attendance (Overall)' },
     { to: '/timetable', label: 'Time Table' },
+    { to: '/profile', label: 'Profile' },
   ]
 
   const pageTitle = navItems.find((x) => x.to === location.pathname)?.label ?? 'Student Management'

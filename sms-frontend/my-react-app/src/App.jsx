@@ -9,6 +9,7 @@ import Fees from './pages/Fees.jsx'
 import AttendanceCurrent from './pages/AttendanceCurrent.jsx'
 import AttendanceOverall from './pages/AttendanceOverall.jsx'
 import Timetable from './pages/Timetable.jsx'
+import Profile from './pages/Profile.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 import './app.css'
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="attendance/current" element={<AttendanceCurrent />} />
             <Route path="attendance/overall" element={<AttendanceOverall />} />
             <Route path="timetable" element={<Timetable />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
