@@ -52,12 +52,15 @@ export default function Fees() {
 
   if (!db.students.length) {
     return (
-      <div className="smsPage">
-        <div className="smsCard">
-          <div className="smsCardHeader">
-            <h2 className="smsCardTitle">Fees</h2>
+      <div className="premium-page">
+        <div className="premium-curved-box">
+          <div className="premium-card-header">
+            <h2 className="premium-card-title">
+              <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>💰</span>
+              Fees
+            </h2>
           </div>
-          <div className="smsMuted">Please add students first.</div>
+          <div style={{ color: 'rgba(255, 255, 255, 0.55)' }}>Please add students first.</div>
         </div>
       </div>
     )
@@ -66,14 +69,17 @@ export default function Fees() {
   const student = db.students.find((s) => s.id === studentId) ?? null
 
   return (
-    <div className="smsPage">
-      <div className="smsCard">
-        <div className="smsCardHeader">
-          <h2 className="smsCardTitle">Fee Management</h2>
-          <div className="smsRow">
-            <div className="smsField" style={{ minWidth: 320 }}>
-              <div className="smsLabel">Student</div>
-              <select className="smsSelect" value={studentId} onChange={(e) => setStudentId(e.target.value)}>
+    <div className="premium-page">
+      <div className="premium-curved-box">
+        <div className="premium-card-header">
+          <h2 className="premium-card-title">
+            <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>💰</span>
+            Fee Management
+          </h2>
+          <div className="premium-grid premium-grid-2">
+            <div className="premium-form-group">
+              <label className="premium-label">Student</label>
+              <select className="premium-select" value={studentId} onChange={(e) => setStudentId(e.target.value)}>
                 {db.students.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.rollNumber} - {s.fullName}
@@ -84,27 +90,28 @@ export default function Fees() {
           </div>
         </div>
 
-        <div className="smsRow" style={{ marginTop: 8 }}>
-          <div>
-            <div className="smsLabel">Total Due</div>
-            <div style={{ fontSize: 24, fontWeight: 900 }}>₹ {dueTotal.toLocaleString()}</div>
+        <div className="premium-grid premium-grid-2" style={{ marginTop: '1.5rem' }}>
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">₹{dueTotal.toLocaleString()}</div>
+            <div className="premium-stat-label">Total Due</div>
           </div>
-          <div>
-            <div className="smsLabel">Pending Records</div>
-            <div style={{ fontSize: 24, fontWeight: 900 }}>{pendingCount}</div>
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">{pendingCount}</div>
+            <div className="premium-stat-label">Pending Records</div>
           </div>
         </div>
 
-        <div className="smsDivider" />
+        <div className="premium-divider" />
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 10, gap: 10, flexWrap: 'wrap' }}>
-          <button type="button" className="smsBtn" onClick={() => setAddOpen(true)}>
-            + Add Fee Entry
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <button type="button" className="premium-btn" onClick={() => setAddOpen(true)}>
+            <span>➕</span>
+            Add Fee Entry
           </button>
         </div>
 
-        <div className="smsTableWrap">
-          <table className="smsTable">
+        <div className="premium-table-container">
+          <table className="premium-table">
             <thead>
               <tr>
                 <th>Month</th>
@@ -119,17 +126,19 @@ export default function Fees() {
                 const isPaid = f.amountDue > 0 && f.amountPaid >= f.amountDue
                 return (
                   <tr key={f.id}>
-                    <td>{f.month}</td>
-                    <td>₹ {f.amountDue.toLocaleString()}</td>
-                    <td>₹ {f.amountPaid.toLocaleString()}</td>
+                    <td><span className="premium-badge premium-badge-primary">{f.month}</span></td>
+                    <td>₹{f.amountDue.toLocaleString()}</td>
+                    <td>₹{f.amountPaid.toLocaleString()}</td>
                     <td>
-                      <span className={`smsBadge ${isPaid ? 'smsBadgeOk' : 'smsBadgeWarn'}`}>{isPaid ? 'Paid' : 'Pending'}</span>
+                      <span className={`premium-badge ${isPaid ? 'premium-badge-success' : 'premium-badge-warning'}`}>
+                        {isPaid ? 'Paid' : 'Pending'}
+                      </span>
                     </td>
                     <td>
-                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                         <button
                           type="button"
-                          className="smsBtn smsBtnSecondary"
+                          className="premium-btn premium-btn-secondary premium-btn-sm"
                           onClick={() => {
                             const now = toLocalISODate(new Date())
                             actions.upsertFee({
@@ -144,7 +153,7 @@ export default function Fees() {
                         </button>
                         <button
                           type="button"
-                          className="smsBtn smsBtnDanger"
+                          className="premium-btn premium-btn-danger premium-btn-sm"
                           onClick={() => {
                             const ok = window.confirm(`Delete fee entry for ${f.month}?`)
                             if (!ok) return
@@ -161,7 +170,7 @@ export default function Fees() {
 
               {fees.length === 0 ? (
                 <tr>
-                  <td colSpan={5} style={{ padding: 16, opacity: 0.85 }}>
+                  <td colSpan={5} style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255, 255, 255, 0.55)' }}>
                     No fee records for {student?.fullName ?? 'this student'}. Add one above.
                   </td>
                 </tr>
@@ -177,33 +186,33 @@ export default function Fees() {
         onClose={() => setAddOpen(false)}
         footer={
           <>
-            <button type="button" className="smsBtn smsBtnSecondary" onClick={() => setAddOpen(false)}>
+            <button type="button" className="premium-btn premium-btn-secondary" onClick={() => setAddOpen(false)}>
               Cancel
             </button>
-            <button type="button" className="smsBtn" onClick={submitAdd}>
+            <button type="button" className="premium-btn" onClick={submitAdd}>
               Add
             </button>
           </>
         }
       >
-        <div className="smsRow">
-          <div className="smsField" style={{ flex: '1 1 220px' }}>
-            <div className="smsLabel">Fee Month</div>
+        <div className="premium-grid premium-grid-2">
+          <div className="premium-form-group">
+            <label className="premium-label">Fee Month</label>
             <input
-              className="smsInput"
+              className="premium-input"
               value={form.month}
               onChange={(e) => setForm((p) => ({ ...p, month: e.target.value }))}
               placeholder="2026-04"
             />
           </div>
-          <div className="smsField" style={{ flex: '1 1 220px' }}>
-            <div className="smsLabel">Amount Due (INR)</div>
-            <input className="smsInput" value={form.amountDue} onChange={(e) => setForm((p) => ({ ...p, amountDue: e.target.value }))} />
+          <div className="premium-form-group">
+            <label className="premium-label">Amount Due (INR)</label>
+            <input className="premium-input" value={form.amountDue} onChange={(e) => setForm((p) => ({ ...p, amountDue: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 100%' }}>
-            <div className="smsLabel">Notes (optional)</div>
+          <div className="premium-form-group" style={{ gridColumn: 'span 2' }}>
+            <label className="premium-label">Notes (optional)</label>
             <textarea
-              className="smsTextArea smsInput"
+              className="premium-textarea"
               value={form.notes}
               onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
             />

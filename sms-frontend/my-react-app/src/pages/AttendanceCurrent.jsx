@@ -37,44 +37,48 @@ export default function AttendanceCurrent() {
   }
 
   return (
-    <div className="smsPage">
-      <div className="smsCard">
-        <div className="smsCardHeader">
-          <h2 className="smsCardTitle">Attendance (Current)</h2>
-          <div className="smsRow" style={{ justifyContent: 'flex-end' }}>
-            <div className="smsField" style={{ minWidth: 260 }}>
-              <div className="smsLabel">Date</div>
-              <input className="smsInput" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+    <div className="premium-page">
+      <div className="premium-curved-box">
+        <div className="premium-card-header">
+          <h2 className="premium-card-title">
+            <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>✅</span>
+            Attendance (Current)
+          </h2>
+          <div className="premium-grid premium-grid-2">
+            <div className="premium-form-group">
+              <label className="premium-label">Date</label>
+              <input className="premium-input" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div className="smsRow" style={{ marginTop: 6, justifyContent: 'space-between' }}>
-          <div>
-            <div className="smsLabel">Present</div>
-            <div style={{ fontSize: 26, fontWeight: 900 }}>{presentCount}/{totalStudents}</div>
+        <div className="premium-grid premium-grid-2" style={{ marginTop: '1.5rem' }}>
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">{presentCount}/{totalStudents}</div>
+            <div className="premium-stat-label">Present</div>
           </div>
-          <div>
-            <div className="smsLabel">Attendance %</div>
-            <div style={{ fontSize: 26, fontWeight: 900 }}>{percentage.toFixed(2)}%</div>
-          </div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            <button type="button" className="smsBtn smsBtnSecondary" onClick={() => setAttendanceMap((prev) => Object.fromEntries(Object.keys(prev).map((k) => [k, true])))}>
-              Mark All Present
-            </button>
-            <button type="button" className="smsBtn smsBtnSecondary" onClick={() => setAttendanceMap((prev) => Object.fromEntries(Object.keys(prev).map((k) => [k, false])))}>
-              Clear
-            </button>
-            <button type="button" className="smsBtn" onClick={save}>
-              Save Attendance
-            </button>
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">{percentage.toFixed(2)}%</div>
+            <div className="premium-stat-label">Attendance Rate</div>
           </div>
         </div>
 
-        <div className="smsDivider" />
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+          <button type="button" className="premium-btn premium-btn-secondary" onClick={() => setAttendanceMap((prev) => Object.fromEntries(Object.keys(prev).map((k) => [k, true])))}>
+            Mark All Present
+          </button>
+          <button type="button" className="premium-btn premium-btn-secondary" onClick={() => setAttendanceMap((prev) => Object.fromEntries(Object.keys(prev).map((k) => [k, false])))}>
+            Clear
+          </button>
+          <button type="button" className="premium-btn" onClick={save}>
+            Save Attendance
+          </button>
+        </div>
 
-        <div className="smsTableWrap">
-          <table className="smsTable">
+        <div className="premium-divider" />
+
+        <div className="premium-table-container">
+          <table className="premium-table">
             <thead>
               <tr>
                 <th>Roll No</th>
@@ -85,21 +89,22 @@ export default function AttendanceCurrent() {
             <tbody>
               {db.students.map((s) => (
                 <tr key={s.id}>
-                  <td>{s.rollNumber}</td>
+                  <td><span className="premium-badge premium-badge-primary">{s.rollNumber}</span></td>
                   <td>
-                    <div style={{ fontWeight: 900 }}>{s.fullName}</div>
-                    <div className="smsMuted" style={{ fontSize: 12 }}>
+                    <div style={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.95)' }}>{s.fullName}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.55)' }}>
                       {s.className}-{s.section}
                     </div>
                   </td>
                   <td>
-                    <label style={{ display: 'inline-flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+                    <label style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}>
                       <input
                         type="checkbox"
                         checked={!!attendanceMap[s.id]}
                         onChange={() => setAttendanceMap((prev) => ({ ...prev, [s.id]: !prev[s.id] }))}
+                        style={{ width: '20px', height: '20px', accentColor: '#2563eb' }}
                       />
-                      <span className={attendanceMap[s.id] ? 'smsBadge smsBadgeOk' : 'smsBadge smsBadgeWarn'}>
+                      <span className={`premium-badge ${attendanceMap[s.id] ? 'premium-badge-success' : 'premium-badge-warning'}`}>
                         {attendanceMap[s.id] ? 'Present' : 'Absent'}
                       </span>
                     </label>
@@ -109,8 +114,8 @@ export default function AttendanceCurrent() {
 
               {db.students.length === 0 ? (
                 <tr>
-                  <td colSpan={3} style={{ padding: 16, opacity: 0.85 }}>
-                    No students yet. Add students from `Student Info`.
+                  <td colSpan={3} style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255, 255, 255, 0.55)' }}>
+                    No students yet. Add students from Student Info.
                   </td>
                 </tr>
               ) : null}

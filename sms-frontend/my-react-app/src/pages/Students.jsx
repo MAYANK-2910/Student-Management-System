@@ -85,26 +85,30 @@ export default function Students() {
   }
 
   return (
-    <div className="smsPage">
-      <div className="smsCard">
-        <div className="smsCardHeader">
-          <h2 className="smsCardTitle">Student Information</h2>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+    <div className="premium-page">
+      <div className="premium-curved-box">
+        <div className="premium-card-header">
+          <h2 className="premium-card-title">
+            <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>👥</span>
+            Student Information
+          </h2>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
             <input
-              className="smsInput"
+              className="premium-input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by name/roll/class/section"
               style={{ minWidth: 280 }}
             />
-            <button type="button" className="smsBtn" onClick={openAdd}>
-              + Add Student
+            <button type="button" className="premium-btn" onClick={openAdd}>
+              <span>➕</span>
+              Add Student
             </button>
           </div>
         </div>
 
-        <div className="smsTableWrap">
-          <table className="smsTable">
+        <div className="premium-table-container">
+          <table className="premium-table">
             <thead>
               <tr>
                 <th>Roll No</th>
@@ -118,26 +122,26 @@ export default function Students() {
             <tbody>
               {filteredStudents.map((s) => (
                 <tr key={s.id}>
-                  <td>{s.rollNumber}</td>
+                  <td><span className="premium-badge premium-badge-primary">{s.rollNumber}</span></td>
                   <td>
-                    <div style={{ fontWeight: 900 }}>{s.fullName}</div>
-                    <div className="smsMuted" style={{ fontSize: 12 }}>
+                    <div style={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.95)' }}>{s.fullName}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.55)' }}>
                       {s.address}
                     </div>
                   </td>
                   <td>
-                    {s.className}-{s.section}
+                    <span className="premium-badge premium-badge-success">{s.className}-{s.section}</span>
                   </td>
                   <td>{s.contact}</td>
                   <td>{s.email}</td>
                   <td>
-                    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                      <button type="button" className="smsBtn smsBtnSecondary" onClick={() => openEdit(s)}>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <button type="button" className="premium-btn premium-btn-secondary premium-btn-sm" onClick={() => openEdit(s)}>
                         Edit
                       </button>
                       <button
                         type="button"
-                        className="smsBtn smsBtnDanger"
+                        className="premium-btn premium-btn-danger premium-btn-sm"
                         onClick={() => {
                           const ok = window.confirm(`Delete ${s.fullName}? This also removes fees and attendance for this student.`)
                           if (!ok) return
@@ -152,7 +156,7 @@ export default function Students() {
               ))}
               {filteredStudents.length === 0 ? (
                 <tr>
-                  <td colSpan={6} style={{ padding: 16, opacity: 0.85 }}>
+                  <td colSpan={6} style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255, 255, 255, 0.55)' }}>
                     No students found.
                   </td>
                 </tr>
@@ -168,43 +172,43 @@ export default function Students() {
         onClose={() => setModalOpen(false)}
         footer={
           <>
-            <button type="button" className="smsBtn smsBtnSecondary" onClick={() => setModalOpen(false)}>
+            <button type="button" className="premium-btn premium-btn-secondary" onClick={() => setModalOpen(false)}>
               Cancel
             </button>
-            <button type="button" className="smsBtn" onClick={submit}>
+            <button type="button" className="premium-btn" onClick={submit}>
               {mode === 'add' ? 'Create' : 'Save'}
             </button>
           </>
         }
       >
-        <div className="smsRow">
-          <div className="smsField" style={{ flex: '1 1 240px' }}>
-            <div className="smsLabel">Full Name</div>
-            <input className="smsInput" value={form.fullName} onChange={(e) => setForm((p) => ({ ...p, fullName: e.target.value }))} />
+        <div className="premium-grid premium-grid-2">
+          <div className="premium-form-group">
+            <label className="premium-label">Full Name</label>
+            <input className="premium-input" value={form.fullName} onChange={(e) => setForm((p) => ({ ...p, fullName: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 180px' }}>
-            <div className="smsLabel">Roll Number</div>
-            <input className="smsInput" value={form.rollNumber} onChange={(e) => setForm((p) => ({ ...p, rollNumber: e.target.value }))} />
+          <div className="premium-form-group">
+            <label className="premium-label">Roll Number</label>
+            <input className="premium-input" value={form.rollNumber} onChange={(e) => setForm((p) => ({ ...p, rollNumber: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 140px' }}>
-            <div className="smsLabel">Class</div>
-            <input className="smsInput" value={form.className} onChange={(e) => setForm((p) => ({ ...p, className: e.target.value }))} />
+          <div className="premium-form-group">
+            <label className="premium-label">Class</label>
+            <input className="premium-input" value={form.className} onChange={(e) => setForm((p) => ({ ...p, className: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 120px' }}>
-            <div className="smsLabel">Section</div>
-            <input className="smsInput" value={form.section} onChange={(e) => setForm((p) => ({ ...p, section: e.target.value }))} />
+          <div className="premium-form-group">
+            <label className="premium-label">Section</label>
+            <input className="premium-input" value={form.section} onChange={(e) => setForm((p) => ({ ...p, section: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 200px' }}>
-            <div className="smsLabel">Contact</div>
-            <input className="smsInput" value={form.contact} onChange={(e) => setForm((p) => ({ ...p, contact: e.target.value }))} />
+          <div className="premium-form-group">
+            <label className="premium-label">Contact</label>
+            <input className="premium-input" value={form.contact} onChange={(e) => setForm((p) => ({ ...p, contact: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 240px' }}>
-            <div className="smsLabel">Email</div>
-            <input className="smsInput" value={form.email} onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))} />
+          <div className="premium-form-group">
+            <label className="premium-label">Email</label>
+            <input className="premium-input" value={form.email} onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))} />
           </div>
-          <div className="smsField" style={{ flex: '1 1 100%' }}>
-            <div className="smsLabel">Address</div>
-            <textarea className="smsTextArea smsInput" value={form.address} onChange={(e) => setForm((p) => ({ ...p, address: e.target.value }))} />
+          <div className="premium-form-group" style={{ gridColumn: 'span 2' }}>
+            <label className="premium-label">Address</label>
+            <textarea className="premium-textarea" value={form.address} onChange={(e) => setForm((p) => ({ ...p, address: e.target.value }))} />
           </div>
         </div>
       </Modal>

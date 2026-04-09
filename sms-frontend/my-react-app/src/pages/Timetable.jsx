@@ -64,14 +64,17 @@ export default function Timetable() {
   }
 
   return (
-    <div className="smsPage">
-      <div className="smsCard">
-        <div className="smsCardHeader">
-          <h2 className="smsCardTitle">Time Table</h2>
-          <div className="smsRow" style={{ justifyContent: 'flex-end' }}>
-            <div className="smsField" style={{ minWidth: 260 }}>
-              <div className="smsLabel">Day</div>
-              <select className="smsSelect" value={day} onChange={(e) => setDay(e.target.value)}>
+    <div className="premium-page">
+      <div className="premium-curved-box">
+        <div className="premium-card-header">
+          <h2 className="premium-card-title">
+            <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>📅</span>
+            Time Table
+          </h2>
+          <div className="premium-grid premium-grid-2">
+            <div className="premium-form-group">
+              <label className="premium-label">Day</label>
+              <select className="premium-select" value={day} onChange={(e) => setDay(e.target.value)}>
                 {daysOfWeek.map((d) => (
                   <option key={d} value={d}>
                     {d}
@@ -82,25 +85,27 @@ export default function Timetable() {
           </div>
         </div>
 
-        <div className="smsRow" style={{ marginTop: 6, justifyContent: 'space-between' }}>
-          <div>
-            <div className="smsLabel">Entries for {day}</div>
-            <div style={{ fontSize: 26, fontWeight: 900 }}>{entries.length}</div>
-          </div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            <button type="button" className="smsBtn smsBtnSecondary" onClick={addPeriod}>
-              + Add Period
-            </button>
-            <button type="button" className="smsBtn" onClick={saveDay}>
-              Save Day
-            </button>
+        <div className="premium-grid premium-grid-2" style={{ marginTop: '1.5rem' }}>
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">{entries.length}</div>
+            <div className="premium-stat-label">Entries for {day}</div>
           </div>
         </div>
 
-        <div className="smsDivider" />
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+          <button type="button" className="premium-btn premium-btn-secondary" onClick={addPeriod}>
+            <span>➕</span>
+            Add Period
+          </button>
+          <button type="button" className="premium-btn" onClick={saveDay}>
+            Save Day
+          </button>
+        </div>
 
-        <div className="smsTableWrap">
-          <table className="smsTable">
+        <div className="premium-divider" />
+
+        <div className="premium-table-container">
+          <table className="premium-table">
             <thead>
               <tr>
                 <th style={{ width: 90 }}>Period</th>
@@ -112,24 +117,24 @@ export default function Timetable() {
             <tbody>
               {entries.map((e) => (
                 <tr key={e.id}>
-                  <td style={{ fontWeight: 900 }}>#{e.period}</td>
+                  <td><span className="premium-badge premium-badge-primary">#{e.period}</span></td>
                   <td>
                     <input
-                      className="smsInput"
+                      className="premium-input"
                       value={draft[e.id]?.subject ?? e.subject}
                       onChange={(ev) => setDraft((p) => ({ ...p, [e.id]: { ...(p[e.id] ?? {}), subject: ev.target.value } }))}
                     />
                   </td>
                   <td>
                     <input
-                      className="smsInput"
+                      className="premium-input"
                       value={draft[e.id]?.startTime ?? e.startTime}
                       onChange={(ev) => setDraft((p) => ({ ...p, [e.id]: { ...(p[e.id] ?? {}), startTime: ev.target.value } }))}
                     />
                   </td>
                   <td>
                     <input
-                      className="smsInput"
+                      className="premium-input"
                       value={draft[e.id]?.endTime ?? e.endTime}
                       onChange={(ev) => setDraft((p) => ({ ...p, [e.id]: { ...(p[e.id] ?? {}), endTime: ev.target.value } }))}
                     />
@@ -139,8 +144,8 @@ export default function Timetable() {
 
               {entries.length === 0 ? (
                 <tr>
-                  <td colSpan={4} style={{ padding: 16, opacity: 0.85 }}>
-                    No timetable entries for this day. Click `+ Add Period` to create one.
+                  <td colSpan={4} style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255, 255, 255, 0.55)' }}>
+                    No timetable entries for this day. Click Add Period to create one.
                   </td>
                 </tr>
               ) : null}
@@ -148,9 +153,9 @@ export default function Timetable() {
           </table>
         </div>
 
-        <div className="smsDivider" />
+        <div className="premium-divider" />
 
-        <div className="smsMuted">
+        <div style={{ color: 'rgba(255, 255, 255, 0.55)', fontSize: '0.875rem' }}>
           Tip: This is a front-end only demo using local mock data. When you connect your backend later, the page can read/update the same fields using APIs.
         </div>
       </div>

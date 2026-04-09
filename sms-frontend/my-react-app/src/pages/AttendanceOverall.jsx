@@ -24,40 +24,44 @@ export default function AttendanceOverall() {
   const avg = rows.length ? rows.reduce((acc, r) => acc + r.percentage, 0) / rows.length : 0
 
   return (
-    <div className="smsPage">
-      <div className="smsCard">
-        <div className="smsCardHeader">
-          <h2 className="smsCardTitle">Attendance (Overall)</h2>
-          <div className="smsRow" style={{ justifyContent: 'flex-end' }}>
-            <div className="smsField" style={{ minWidth: 220 }}>
-              <div className="smsLabel">From</div>
-              <input className="smsInput" type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
+    <div className="premium-page">
+      <div className="premium-curved-box">
+        <div className="premium-card-header">
+          <h2 className="premium-card-title">
+            <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>📈</span>
+            Attendance (Overall)
+          </h2>
+          <div className="premium-grid premium-grid-2">
+            <div className="premium-form-group">
+              <label className="premium-label">From</label>
+              <input className="premium-input" type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
             </div>
-            <div className="smsField" style={{ minWidth: 220 }}>
-              <div className="smsLabel">To</div>
-              <input className="smsInput" type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
+            <div className="premium-form-group">
+              <label className="premium-label">To</label>
+              <input className="premium-input" type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div className="smsRow" style={{ marginTop: 6, justifyContent: 'space-between' }}>
-          <div>
-            <div className="smsLabel">Students</div>
-            <div style={{ fontSize: 26, fontWeight: 900 }}>{rows.length}</div>
+        <div className="premium-grid premium-grid-2" style={{ marginTop: '1.5rem' }}>
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">{rows.length}</div>
+            <div className="premium-stat-label">Students</div>
           </div>
-          <div>
-            <div className="smsLabel">Average Attendance %</div>
-            <div style={{ fontSize: 26, fontWeight: 900 }}>{avg.toFixed(2)}%</div>
-          </div>
-          <div className="smsMuted" style={{ alignSelf: 'center' }}>
-            Computed from attendance entries in that date range.
+          <div className="premium-stat-card">
+            <div className="premium-stat-value">{avg.toFixed(2)}%</div>
+            <div className="premium-stat-label">Average Attendance</div>
           </div>
         </div>
 
-        <div className="smsDivider" />
+        <div style={{ color: 'rgba(255, 255, 255, 0.55)', marginTop: '1rem', fontSize: '0.875rem' }}>
+          Computed from attendance entries in that date range.
+        </div>
 
-        <div className="smsTableWrap">
-          <table className="smsTable">
+        <div className="premium-divider" />
+
+        <div className="premium-table-container">
+          <table className="premium-table">
             <thead>
               <tr>
                 <th>Roll No</th>
@@ -69,22 +73,22 @@ export default function AttendanceOverall() {
             </thead>
             <tbody>
               {rows.map((r) => {
-                const badgeClass = r.percentage >= 75 ? 'smsBadgeOk' : (r.percentage >= 50 ? 'smsBadgeWarn' : 'smsBadgeWarn')
+                const badgeClass = r.percentage >= 75 ? 'premium-badge-success' : (r.percentage >= 50 ? 'premium-badge-warning' : 'premium-badge-error')
                 return (
                   <tr key={r.studentId}>
-                    <td>{r.rollNumber}</td>
-                    <td style={{ fontWeight: 900 }}>{r.fullName}</td>
+                    <td><span className="premium-badge premium-badge-primary">{r.rollNumber}</span></td>
+                    <td style={{ fontWeight: 700, color: 'rgba(255, 255, 255, 0.95)' }}>{r.fullName}</td>
                     <td>{r.presentCount}</td>
                     <td>{r.totalSessions}</td>
                     <td>
-                      <span className={`smsBadge ${badgeClass}`}>{r.percentage.toFixed(2)}%</span>
+                      <span className={`premium-badge ${badgeClass}`}>{r.percentage.toFixed(2)}%</span>
                     </td>
                   </tr>
                 )
               })}
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={5} style={{ padding: 16, opacity: 0.85 }}>
+                  <td colSpan={5} style={{ padding: '2rem', textAlign: 'center', color: 'rgba(255, 255, 255, 0.55)' }}>
                     No data for this date range. Mark attendance on the Current Attendance page first.
                   </td>
                 </tr>
